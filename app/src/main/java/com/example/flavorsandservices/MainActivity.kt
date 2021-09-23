@@ -2,6 +2,7 @@ package com.example.flavorsandservices
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Adapter
 import androidx.appcompat.widget.SearchView
 import com.example.flavorsandservices.databinding.ActivityMainBinding
@@ -46,6 +47,8 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             val dogs : DogsResponse? = call.body()
 
             runOnUiThread {
+
+
                 if(call.isSuccessful){
                 val images = dogs?.images ?: emptyList()
                 //ahora quiero pasar las images al adapterasí que uso run
@@ -53,6 +56,8 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                     dogImages.addAll(images)
                     //este avisa que se cambio la data del adapter
                     adapter.notifyDataSetChanged()
+                }else{
+                    //Log.e("Retrofit", "Error en call, Error Code ${}")
                 }
 
             }
